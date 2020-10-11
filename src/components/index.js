@@ -1,5 +1,6 @@
 import {StoryList} from './StoryList';
+import {BottomBar} from './BottomBar';
 
 export {
-  StoryList
+  StoryList, BottomBar
 }

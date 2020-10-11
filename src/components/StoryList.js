@@ -5,7 +5,7 @@ const StoryList = ({ data }) => {
 
 
   return (
-    <Text>Bip</Text>
+    <Text></Text>
   )
 };
 
