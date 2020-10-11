@@ -1,5 +1,5 @@
 import { describe } from 'riteway';
-import { handlePageReducer, initialState, setList, pageNext, pagePrevious } from '../src/reducer/storyContainer.reducer';
+import { handlePageReducer, initialState, setList, pageNext, pagePrevious } from '../src/reducers/storyContainer.reducer';
 
 describe('storyContainer reducers', async assert => {
 

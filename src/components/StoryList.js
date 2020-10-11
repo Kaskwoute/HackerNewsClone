@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-const StoryContainer = () => {
+const StoryList = ({ data }) => {
+
 
   return (
-    <Text>Test</Text>
+    <Text>Bip</Text>
   )
 };
 
 export {
-  StoryContainer
+  StoryList
 }

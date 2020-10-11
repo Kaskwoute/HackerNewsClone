@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 
-import {dataFetchReducer, fetchSuccess, fetchFailure} from '../reducer/useResquest.reducer';
+import {dataFetchReducer, fetchSuccess, fetchFailure} from '../reducers/useResquest.reducer';
 
 /**
  * useRequest: Hook to make GET request

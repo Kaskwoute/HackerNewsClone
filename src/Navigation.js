@@ -3,8 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet } from 'react-native';
 
-import { StoryContainer } from './container/StoryContainer';
-import { Text } from 'react-native';
+import { StoryContainer } from './containers/StoryContainer';
 
 const Stack = createStackNavigator();
 
