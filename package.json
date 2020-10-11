@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test:unit": "riteway -r @babel/register -r @babel/polyfill test/**/*.test.js"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -23,7 +24,10 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "^7.11.6",
+    "@babel/polyfill": "^7.11.5",
+    "@babel/register": "^7.11.5",
+    "riteway": "^6.2.0"
   },
   "private": true
 }
