@@ -1,7 +1,7 @@
 import { describe } from 'riteway';
 import { handlePageReducer, initialState, setList, pageNext, pagePrevious } from '../src/reducers/storyContainer.reducer';
 
-describe('storyContainer reducers', async assert => {
+describe('storyContainer reducer', async assert => {
 
   {
     assert({

@@ -2,7 +2,7 @@ import { describe } from 'riteway';
 
 import { dataFetchReducer, initialState, fetchFailure, fetchSuccess, initFetch } from '../src/reducers/useResquest.reducer';
 
-describe('UseRequest reducers', async assert => {
+describe('UseRequest reducer', async assert => {
 
   {
     assert({

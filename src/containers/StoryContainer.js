@@ -4,6 +4,7 @@ import { getUrlBestStories } from '../utils/api';
 import { useRequest } from '../hooks';
 import { StoryList, BottomBar } from '../components';
 import { handlePageReducer, setList } from '../reducers/storyContainer.reducer';
+import { acc } from 'react-native-reanimated';
 
 const StoryContainer = ({ navigation }) => {
 
@@ -21,7 +22,9 @@ const StoryContainer = ({ navigation }) => {
   return (
     <View style={ styles.container }>
       <ActivityIndicator size={ 'large' } animating={ loading }/>
-      {/*<StoryList data={ data } page={ state.page } chunkSize={ state.chunkSize }/>*/}
+      { Array.isArray(state.bestStories) && state.bestStories.length > 0 &&
+        <StoryList data={ state.bestStories } page={ state.page } chunkSize={ state.chunkSize }/>
+      }
       <BottomBar page={ state.page } isLastPage={ state.islastPage } dispatchPageChange={ dispatch }/>
     </View>
   )
