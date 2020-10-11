@@ -1,9 +1,13 @@
 import React from 'react';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+
 import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
 
 const Story = ({ item }) => {
 
-  const { score, time, title, url, comments } = item;
+  const { score, time, title, url, kids } = item;
 
   return (
     <View style={ styles.container }>
@@ -12,7 +16,7 @@ const Story = ({ item }) => {
         <View>
           <View style={ styles.flexRow }>
             { score && <Text style={ styles.padding }>+ { score }</Text> }
-            {/*<TimeDiff time={ time }/>*/}
+            <Text>{ dayjs(time * 1000).fromNow() }</Text>
           </View>
 
           <View>
@@ -24,8 +28,8 @@ const Story = ({ item }) => {
 
       <View style={ [styles.padding, styles.commentInfo] }>
         {/*<MaterialCommunityIcons name="message-reply-text" size={ 24 } color="#b2b3b2"/>*/}
-        { Array.isArray(comments) ?
-          <Text style={ [styles.padding, styles.sofColor, { alignSelf: 'flex-end' }] }>{ comments.length }</Text> :
+        { Array.isArray(kids) ?
+          <Text style={ [styles.padding, styles.sofColor, { alignSelf: 'flex-end' }] }>{ kids.length }</Text> :
           <Text style={ [styles.padding, styles.sofColor, { alignSelf: 'flex-end' }] }>0</Text>
         }
       </View>
@@ -43,6 +47,7 @@ const styles = StyleSheet.create({
   },
   flexRow: {
     flexDirection: 'row',
+    alignItems: 'center'
   },
   padding: {
     padding: 3,
