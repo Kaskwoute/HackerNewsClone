@@ -1,16 +1,15 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import { Text } from 'react-native';
-import { getUrlItem } from '../utils/api';
+import React, { useEffect, useState } from 'react';
 import { slice } from 'ramda';
+import { FlatList } from 'react-native';
+
+import { getUrlItem } from '../utils/api';
 import { useRequest } from '../hooks';
-import { handleListReducer, pushDisplayed, updateDisplayed } from '../reducers/storyList.reducer';
+import { Story } from './Story';
 
 const StoryList = ({ data, page, chunkSize }) => {
-  const [state, dispatch] = useReducer(handleListReducer, handleListReducer());
-
   const [urls, setUrls] = useState([]);
 
-  const [urls, setUrls] = useState([]);
+  const [displayList, setDisplayList] = useState([]);
 
   const {loading, error, data: dataItems} = useRequest(urls, true);
 
@@ -23,11 +22,15 @@ const StoryList = ({ data, page, chunkSize }) => {
   }, [data, page]);
 
   useEffect(() => {
-    if(!loading) console.log(loading, error, dataItems)
+    if(!loading) setDisplayList(dataItems)
   }, [loading]);
 
   return (
-    <Text></Text>
+    <FlatList
+      data={displayList}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={Story}
+    />
   )
 };
 

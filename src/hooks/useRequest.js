@@ -6,7 +6,7 @@ import { dataFetchReducer, fetchSuccess, fetchFailure, initFetch } from '../redu
  *
  * @param initUrl: url to fetch from (only work for GET)
  * @param cachable: boolean whether or not to cache this request
- * @return {{isLoading: boolean, isError: boolean, data: (Object | Array | undefined )}}
+ * @return {{isLoading: boolean, isError: boolean, data: Array}}
  */
 const useRequest = (initUrl, cachable = false) => {
   const cache             = useRef({});
