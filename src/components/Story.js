@@ -1,5 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
@@ -27,10 +28,10 @@ const Story = ({ item }) => {
       </TouchableHighlight>
 
       <View style={ [styles.padding, styles.commentInfo] }>
-        {/*<MaterialCommunityIcons name="message-reply-text" size={ 24 } color="#b2b3b2"/>*/}
+        <MaterialCommunityIcons name="message-reply-text" size={ 24 } color="#b2b3b2"/>
         { Array.isArray(kids) ?
-          <Text style={ [styles.padding, styles.sofColor, { alignSelf: 'flex-end' }] }>{ kids.length }</Text> :
-          <Text style={ [styles.padding, styles.sofColor, { alignSelf: 'flex-end' }] }>0</Text>
+          <Text style={ [styles.padding, styles.sofColor] }>{ kids.length }</Text> :
+          <Text style={ [styles.padding, styles.sofColor] }>0</Text>
         }
       </View>
     </View>
