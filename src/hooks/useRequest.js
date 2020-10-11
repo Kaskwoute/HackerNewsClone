@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 
-import {dataFetchReducer, fetchSuccess, fetchFailure} from '../reducers/useResquest.reducer';
+import { dataFetchReducer, fetchSuccess, fetchFailure, initFetch } from '../reducers/useResquest.reducer';
 
 /**
  * useRequest: Hook to make GET request
@@ -9,7 +9,6 @@ import {dataFetchReducer, fetchSuccess, fetchFailure} from '../reducers/useResqu
  * @return {{isLoading: boolean, isError: boolean, data: (Object | Array | undefined )}}
  */
 const useRequest = (initUrl) => {
-
   const [state, dispatch] = useReducer(dataFetchReducer, dataFetchReducer());
 
   useEffect(() => {
@@ -18,24 +17,26 @@ const useRequest = (initUrl) => {
 
     const fetchData = async () => {
       try {
+        dispatch(initFetch());
+
         const response = await fetch(initUrl);
 
-        const responseData = await  response.json();
+        const responseData = await response.json();
 
-        if( _isMounted) dispatch(fetchSuccess(responseData));
+        if (_isMounted) dispatch(fetchSuccess(responseData));
       } catch (err) {
-        if( _isMounted) dispatch(fetchFailure());
+        if (_isMounted) dispatch(fetchFailure());
       }
     };
 
     fetchData();
 
-    return () => {  _isMounted = false; }
+    return () => { _isMounted = false; }
   }, [initUrl]);
 
   return state;
 };
 
 export {
-  useRequest
+  useRequest,
 }

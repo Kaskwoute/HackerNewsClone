@@ -1,5 +1,5 @@
 const initialState = {
-  loading: true,
+  loading: false,
   error: false,
   data: undefined,
 };
@@ -13,8 +13,17 @@ const fetchFailure = () => ({
   type: 'FETCH_FAILURE',
 });
 
+const initFetch = () => ({
+  type: 'FETCH_INIT',
+});
+
 const dataFetchReducer = (state = initialState, { payload, type } = {}) => {
   switch (type) {
+    case initFetch().type:
+      return {
+        ...state,
+        loading: true,
+      };
     case fetchSuccess().type:
       return {
         ...state,
@@ -34,5 +43,5 @@ const dataFetchReducer = (state = initialState, { payload, type } = {}) => {
 };
 
 export {
-  dataFetchReducer, fetchSuccess, fetchFailure, initialState
+  dataFetchReducer, fetchSuccess, fetchFailure, initialState, initFetch
 }
