@@ -24,7 +24,6 @@ const useRequest = (initUrl) => {
 
         if( _isMounted) dispatch(fetchSuccess(responseData));
       } catch (err) {
-        console.log(err);
         if( _isMounted) dispatch(fetchFailure());
       }
     };
