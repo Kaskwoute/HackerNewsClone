@@ -44,7 +44,7 @@ const handlePageReducer = (state = initialState, { type, payload } = {}) => {
       return {
         ...state,
         page: state.page === 0 ? 0 : state.page - 1,
-        islastPage: state.page > 0 ? true : state.islastPage
+        islastPage: state.page > 0 ? false : state.islastPage
       };
     default:
       return { ...state };
