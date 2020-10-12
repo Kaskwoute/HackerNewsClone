@@ -6,12 +6,12 @@ import { getUrlItem } from '../utils/api';
 import { useRequest } from '../hooks';
 import { Story } from './Story';
 
-const StoryList = ({ data, page, chunkSize }) => {
+const StoryList = ({ data, page, chunkSize, setListLoading }) => {
   const [urls, setUrls] = useState([]);
 
   const [displayList, setDisplayList] = useState([]);
 
-  const {loading, error, data: dataItems} = useRequest(urls, true);
+  const {loading, data: dataItems} = useRequest(urls, true);
 
   useEffect(() => {
     const listDataUrl = slice(page * chunkSize, page * chunkSize + chunkSize, data).map(
@@ -21,8 +21,13 @@ const StoryList = ({ data, page, chunkSize }) => {
     setUrls(listDataUrl);
   }, [data, page]);
 
+
   useEffect(() => {
-    if(!loading) setDisplayList(dataItems)
+    setListLoading(loading);
+
+    if(!loading) {
+      setDisplayList(dataItems)
+    }
   }, [loading]);
 
   return (

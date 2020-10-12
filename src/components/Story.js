@@ -2,16 +2,17 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import relativeTime from 'dayjs/plugin/relativeTime';
+
 dayjs.extend(relativeTime);
 
-import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
+import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 
-const Story = ({ item }) => {
+const Story = ({ item, index }) => {
 
-  const { score, time, title, url, kids } = item;
+  const { score, time, title, url, kids, id } = item;
 
   return (
-    <View style={ styles.container }>
+    <View style={ styles.container } key={ id }>
       <TouchableHighlight onPress={ () => {} } underlayColor={ '#fa8d0059' }
                           style={ [styles.padding, styles.newsInfo] }>
         <View>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   },
   flexRow: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   padding: {
     padding: 3,
@@ -73,5 +74,5 @@ const styles = StyleSheet.create({
 });
 
 export {
-  Story
+  Story,
 }

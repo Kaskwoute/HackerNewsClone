@@ -2,20 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { pageNext, pagePrevious } from '../reducers/storyContainer.reducer';
 
-const BottomBar = ({ page, isLastPage, dispatchPageChange }) => {
+const BottomBar = ({ page, isLastPage, dispatchPageChange, isLoading }) => {
 
-  // TODO: fix the css
   return (
     <View style={ styles.bottomBar }>
       { page > 0 &&
-      <TouchableWithoutFeedback onPress={ () => dispatchPageChange(pagePrevious()) }>
-        <Text style={ styles.white }>Prev</Text>
+      <TouchableWithoutFeedback onPress={ () => { if (!isLoading) dispatchPageChange(pagePrevious()) } }>
+        <Text style={ isLoading ? styles.grey : styles.white }>Prev</Text>
       </TouchableWithoutFeedback>
       }
 
       { !isLastPage &&
-      <TouchableWithoutFeedback onPress={ () => dispatchPageChange(pageNext()) }>
-        <Text style={ styles.white }>Next</Text>
+      <TouchableWithoutFeedback onPress={ () => { if (!isLoading) dispatchPageChange(pageNext()) } }>
+        <Text style={ isLoading ? styles.grey : styles.white }>Next</Text>
       </TouchableWithoutFeedback>
       }
     </View>
@@ -38,6 +37,9 @@ const styles = StyleSheet.create({
   },
   white: {
     color: '#fff',
+  },
+  grey: {
+    color: '#dadada',
   },
 });
 

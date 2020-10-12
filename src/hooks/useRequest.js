@@ -6,9 +6,10 @@ import { dataFetchReducer, fetchSuccess, fetchFailure, initFetch } from '../redu
  *
  * @param initUrl: url to fetch from (only work for GET)
  * @param cachable: boolean whether or not to cache this request
+ * @param refreshFlag: used for the 30sc refresh
  * @return {{isLoading: boolean, isError: boolean, data: Array}}
  */
-const useRequest = (initUrl, cachable = false) => {
+const useRequest = (initUrl, cachable = false, refreshFlag) => {
   const cache             = useRef({});
   const [state, dispatch] = useReducer(dataFetchReducer, dataFetchReducer());
 
@@ -76,7 +77,7 @@ const useRequest = (initUrl, cachable = false) => {
     fetchData();
 
     return () => { _isMounted = false; }
-  }, [JSON.stringify(initUrl)]);
+  }, [JSON.stringify(initUrl), refreshFlag]);
 
   return state;
 };
