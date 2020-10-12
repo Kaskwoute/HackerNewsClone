@@ -21,7 +21,7 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Network/>
+      { !connection && <Network/> }
       <Stack.Navigator initialRouteName={ 'Home' }>
         <Stack.Screen name={ 'Home' } component={ StoryContainer } options={ {
           title: 'Hews',

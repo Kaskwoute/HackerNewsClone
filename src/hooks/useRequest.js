@@ -2,17 +2,30 @@ import React, { useEffect, useReducer, useRef } from 'react';
 import { dataFetchReducer, fetchSuccess, fetchFailure, initFetch } from '../reducers/useResquest.reducer';
 
 /**
- * useRequest: Hook to make GET request
+ * @description:
  *
- * @param initUrl: url to fetch from (only work for GET)
+ * @param initUrl: url to fetch from (only work with GET)
  * @param cachable: boolean whether or not to cache this request
- * @param refreshFlag: used for the 30sc refresh
+ * @param refreshFlag: Hack used to force useEffect refresh
+ *
  * @return {{isLoading: boolean, isError: boolean, data: Array}}
  */
 const useRequest = (initUrl, cachable = false, refreshFlag) => {
   const cache             = useRef({});
   const [state, dispatch] = useReducer(dataFetchReducer, dataFetchReducer());
 
+  /**
+   *
+   * @description: Take an array of url and return url that where cached and those that needs to be fetched
+   *
+   * @param urlArray: Array of url
+   *
+   * @typedef {Object} CachedUrls
+   * @property {Array} cached - url response that are cached
+   * @property {Array} toFetch - url response that are not cached
+   *
+   * @return {(CachedUrls)}
+   */
   const checkCachedUrls = (urlArray) => urlArray.reduce(({ cached, toFetch }, url) => {
     if (cache.current[url]) cached = [...cached, cache.current[url]];
     else toFetch = [...toFetch, url];
@@ -28,9 +41,10 @@ const useRequest = (initUrl, cachable = false, refreshFlag) => {
   });
 
   useEffect(() => {
+    // Do nothing if url is not correct, usually undefined or [] when component is mounted
     if (!initUrl || (Array.isArray(initUrl) && initUrl.length === 0)) return;
 
-    // Prevent changing state when unmounted (might use setInterval later on, if not remove it)
+    // Prevent changing state when unmounted
     let _isMounted = true;
 
     const fetchData = async () => {

@@ -4,7 +4,7 @@ import { Text, View, StyleSheet } from 'react-native';
 const Network = () => {
   return (
     <View style={ styles.network }>
-      <Text>No connection :(</Text>
+      <Text style={ styles.white }>No connection :(</Text>
     </View>
   )
 };
@@ -12,11 +12,18 @@ const Network = () => {
 const styles = StyleSheet.create({
   network: {
     position: 'absolute',
-    top: 0,
-    zIndex: 10,
+    bottom: 0,
+    zIndex: 1,
+    height: '5%',
+    width: '100%',
+    backgroundColor: '#333333',
     flex: 1,
-    backgroundColor: 'red'
+    justifyContent: 'center'
   },
+  white: {
+    color: '#fff',
+    fontSize: 15
+  }
 });
 
 export {

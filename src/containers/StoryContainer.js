@@ -6,7 +6,6 @@ import { StoryList, BottomBar } from '../components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { handlePageReducer, setList } from '../reducers/storyContainer.reducer';
 
-
 const StoryContainer = ({ navigation }) => {
   // Use to prevent next / prev while list is still loading
   const [listLoading, setListLoading] = useState(false);
@@ -14,8 +13,18 @@ const StoryContainer = ({ navigation }) => {
   // Hack to make useEffect trigger, used for list reload
   const [flagRequest, setFlagRequest] = useState(false);
 
+  // Fetch beststories from HN
+  const { loading, data } = useRequest(getUrlBestStories(), false, flagRequest);
+
+  // Reducers used for paging
   const [state, dispatch] = useReducer(handlePageReducer, handlePageReducer());
 
+  // Used to handle when data is ready for view
+  useEffect(() => {
+    if (!loading && Array.isArray(data)) dispatch(setList(data));
+  }, [loading]);
+
+  // Used for refreshing every 30sc
   useEffect(() => {
     const interval = setInterval(() => {
       setFlagRequest(!flagRequest);
@@ -34,12 +43,6 @@ const StoryContainer = ({ navigation }) => {
       ),
     });
   }, [navigation]);
-
-  const { loading, data } = useRequest(getUrlBestStories(), false, flagRequest);
-
-  useEffect(() => {
-    if (!loading && Array.isArray(data)) dispatch(setList(data));
-  }, [loading]);
 
   return (
     <View style={ styles.container }>
